@@ -1,4 +1,4 @@
-FROM nestybox/ubuntu-noble-systemd-docker:latest
+FROM nestybox/ubuntu-noble-systemd-docker@sha256:8b1c4409fe89bc110e1e468767074fe4403ba6bb2d1b34881fec5df8b6c2f9c3
 
 #Change user to root
 USER "root"

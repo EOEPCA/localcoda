@@ -7,7 +7,7 @@ To deploy localcoda directly on a single server you can use the `local` orchestr
 The following pre-requistes needs to be met to deploy localcoda on a single server:
 - [Docker](https://www.docker.com/) is installed on your server. Check the [installation guide](https://docs.docker.com/engine/install/) on how to install it.
 - Your user has rights to run Docker. To check this works, you can run `docker ps`. If it gives you no error, you should be fine.
-- You have downloaded the localcoda latest release. To do so, you can run `git clone https://github.com/spinto/localcoda`
+- You have downloaded the localcoda latest release. To do so, you can run `git clone https://github.com/EOEPCA/localcoda`
 - You have setup in your `backend\cfg\conf` file `ORCHESTRATION_ENGINE=local`
 - You have a wildcard DNS address mapping the server local IP to the `EXT_DOMAIN_NAME` defined in your `backend\cfg\conf`. In more details, `*$EXT_DOMAIN_NAME` need to resolve to your server instance. By default, `EXT_DOMAIN_NAME` is set to `.\$NIP_ADDRESS`, which will use [nip.io](https://sslip.io/) to generate a wildcard DNS entry mapping to your server internal IP. You can keep using this if you do not know how to setup use things like a wildcard DNS.
 

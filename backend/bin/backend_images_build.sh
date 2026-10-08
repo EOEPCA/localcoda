@@ -27,10 +27,10 @@ Options:
   -h             displays this help page
   -E <engine>    virtualization engines to build images for. Can be docker or sysbox.
                  Defaults to $VIRT_ENGINE.
-  -Bs <scheme>   base scheme to use for the built images. Defaults to $IMAGES_DOCKER_BASE_SCHEME
+  -Bs <scheme>   base scheme to use for the built images. Defaults to $IMAGES_BASE_SCHEME
                  You can use the following variables in this scheme: \$VIRT_ENGINE as the virtual
   							 engine in use and \$i as the name of the image directory in the "images" folder
-  -Bt <tag>      image tag for the built. Defaults to $IMAGE_TAG
+  -Bt <tag>      image tag for the built. Defaults to $IMAGES_TAG
   -d <dir>       directory where to find the images to build, in sub-directories. Defaults to
                  "$APPDIR/images/\$VIRT_ENGINE"
   --publish      publish the images after build (do docker push). Do not forget to do a docker
@@ -39,7 +39,7 @@ Options:
   exit 1
 }
 
-IMAGES_BASE_SCHEME="spinto/localcoda-\$VIRT_ENGINE-\${i,,}"
+IMAGES_BASE_SCHEME="eoepca/localcoda-\$VIRT_ENGINE-\${i,,}"
 IMAGES_TAG=latest
 VIRT_ENGINE=docker
 PUBLISH_IMAGES=false

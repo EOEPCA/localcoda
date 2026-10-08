@@ -1,5 +1,5 @@
 #Use the format <image-ID-in-tutorial> <image-name-plus-tag> <image-hostname> <memory limit> <cpu limit> (spaces are not allowed in any of the entries)
-ubuntu spinto/localcoda-sysbox-ubuntu:latest ubuntu 0 0
-ubuntu-4GB spinto/localcoda-sysbox-ubuntu:latest ubuntu 0 0
-kubernetes-kubeadm-1node spinto/localcoda-sysbox-k3s:latest controlplane 0 0
-kubernetes-kubeadm-1node-4GB spinto/localcoda-sysbox-k3s:latest controlplane 0 0
+ubuntu eoepca/localcoda-sysbox-ubuntu:eoepca-2.1 ubuntu 0 0
+ubuntu-4GB eoepca/localcoda-sysbox-ubuntu:eoepca-2.1 ubuntu 0 0
+kubernetes-kubeadm-1node eoepca/localcoda-sysbox-k3s:eoepca-2.1 controlplane 0 0
+kubernetes-kubeadm-1node-4GB eoepca/localcoda-sysbox-k3s:eoepca-2.1 controlplane 0 0

@@ -25,7 +25,7 @@ git clone https://github.com/killercoda/scenario-examples
 Then you need to download this application
 
 ```
-git clone https://github.com/spinto/localcoda
+git clone https://github.com/EOEPCA/localcoda
 cd localcoda
 ```
 
@@ -62,7 +62,7 @@ In order to deploy localcoda on a on a Kubernetes cluster you need
 If you have the above, then first download the localcoda latest release via
 
 ```
-git clone https://github.com/spinto/localcoda
+git clone https://github.com/EOEPCA/localcoda
 ```
 
 Edit the `backend/cfg/conf` file and set:
