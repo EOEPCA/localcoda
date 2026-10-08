@@ -58,7 +58,7 @@ Options:
 
 FRONTEND_NAME="lc-frontend"
 KUBERNETES_FRONTEND_REPLICAS=1
-IMAGE_TORUN=eoepca/localcoda-frontend:eoepca-2.1
+IMAGE_TORUN=eoepca/localcoda-frontend:latest
 LOCAL_EXT_IPPORT=0.0.0.0:80
 LOCAL_DEV_MODE=false
 OAUTH2_PROXY_CONF=
