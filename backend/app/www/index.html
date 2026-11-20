@@ -417,6 +417,16 @@
     outline: 1px solid #eade81
   }
 
+  .scenario-content .copy.command-clicked,
+  .scenario-content .exec.command-clicked {
+    outline: 2px solid #198754;
+    background-color: #e8f5e9;
+  }
+
+  .scenario-content pre.command-clicked code {
+    background-color: transparent;
+  }
+
   #toaster {
     visibility: hidden;
     background-color: #333;
@@ -484,6 +494,8 @@
     let options={};
     let tutorial_index={};
     let tutorial_basedir="";
+    let clickedCommands = new Set();
+    let clickedCommandsKey = '';
     async function startup() {
       //Load options
       try {
@@ -504,6 +516,15 @@
       } catch (error) {
         dError('Failed to load tutorial: ' + error.message);
         return;
+      }
+      clickedCommandsKey = 'localcoda.clickedCommands:' + options['index_file'];
+      try {
+        const saved = JSON.parse(localStorage.getItem(clickedCommandsKey));
+        if (Array.isArray(saved)) {
+          clickedCommands = new Set(saved);
+        }
+      } catch {
+        clickedCommands = new Set();
       }
       //Set tutorial base directory for loading stuff
       tutorial_basedir='../t/'+options['index_file']; tutorial_basedir=tutorial_basedir.substr(0, tutorial_basedir.lastIndexOf('/'))+'/';
@@ -674,7 +695,12 @@
 
       //update page html
       pagehtml='<span><div class="scenario-content"><span class="scenario-content-header"><h1>'+tutorial_index['title']+'</h1>';
-      if(n>-1&&n<nl&&page_title) { pagehtml=pagehtml+'<h2>'+page_title+'</h2>'; }
+      if(n>-1&&n<nl) {
+        const stepNumber = n + 1;
+        const stepTitle = page_title ? page_title + ' ' : '';
+        const stepProgress = `<span class="step-progress" aria-label="Step ${stepNumber} of ${nl}">(${stepNumber}/${nl})</span>`;
+        pagehtml += '<h2>' + stepTitle + stepProgress + '</h2>';
+      }
       pagehtml=pagehtml+'</span><div class="sectionContent">'+md+'</div></div>';
       pagehtml=pagehtml+'<div style="margin: 0px 20px 50px 20px;"><br><div>';
       if(n==-1){
@@ -703,7 +729,17 @@
       hljs.highlightLines();
 
       //update events for copy and exec
-      Array.from(document.getElementsByClassName('exec')).concat(Array.from(document.getElementsByClassName('copy'))).forEach((a) => {a.onmouseenter=()=>{me(a);};a.onmouseleave=ml;a.onclick=()=>{pc(a)};});
+      const commands = document.querySelectorAll('.scenario-content .exec, .scenario-content .copy');
+      commands.forEach((command, index) => {
+        const commandId = n + ':' + index;
+        command.dataset.commandId = commandId;
+        if (clickedCommands.has(commandId)) {
+          command.classList.add('command-clicked');
+        }
+        command.onmouseenter = () => me(command);
+        command.onmouseleave = ml;
+        command.onclick = () => pc(command);
+      });
       
     }
     //parse classes to execute events on click from the markdown
@@ -719,6 +755,13 @@
         document.getElementById('y'+tabsl.toString()).contentDocument.querySelector("textarea.xterm-helper-textarea").dispatchEvent(new KeyboardEvent('keypress', {charCode: 13}));
       }
       ml();
+      e.classList.add('command-clicked');
+      clickedCommands.add(e.dataset.commandId);
+      try {
+        localStorage.setItem(clickedCommandsKey, JSON.stringify([...clickedCommands]));
+      } catch {
+        return;
+      }
     }
     //toaster location mouseover event
     function me(e){
