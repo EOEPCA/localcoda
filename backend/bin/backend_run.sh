@@ -263,6 +263,7 @@ if [[ $ORCHESTRATION_ENGINE == "local" ]]; then
 		DOCKER_RUN_ARGS="--mount type=volume,src=$TUTORIALS_VOLUME,dst=/etc/localcoda/tutorial,volume-subpath=$TUTORIAL_DIR"
 	fi
   [[ "$BACKEND_T_MODE" == "rw" ]] || DOCKER_RUN_ARGS="$DOCKER_RUN_ARGS,ro"
+  DOCKER_RUN_ARGS="$DOCKER_RUN_ARGS --dns-search=."
 
   #Get runtime engine
   if [[ $VIRT_ENGINE == "docker" ]]; then
